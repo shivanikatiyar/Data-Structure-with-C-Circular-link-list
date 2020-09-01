@@ -1,7 +1,7 @@
-                          	  Assignment-6(DS)Circular Link List
-						**********************************************	   
+                          	  Assignment-8(DS)Circular Link List
+			    **********************************************	   
 					
-	Question.1:  [Create a CLL of 6 nodes insert input in your code]
+   Question.1:  [Create a CLL of 6 nodes insert input in your code]
 
                      [Program Code]
 		
