@@ -1,0 +1,421 @@
+                          	  Assignment-6(DS)Circular Link List
+						**********************************************	   
+					
+	Question.1:  [Create a CLL of 6 nodes insert input in your code]
+
+                     [Program Code]
+		
+    #include<stdio.h>
+    struct node
+    {
+    int data;
+    struct node* next;
+    };
+   struct node* head=NULL,*last=NULL;
+   void insertCLL(int x)
+   {
+    struct node* temp;
+    temp = (struct node*)malloc(sizeof(struct node));
+    temp->data=x;
+    temp->next=temp;
+    if(head==NULL)
+    {
+        head=last=temp;
+
+    }
+    else{
+        last->next=temp;
+        last=temp;
+        last->next=head;
+       }
+    }
+   void display()
+   {
+   struct node* p=head;
+   do
+    {
+      printf("\t%d",p->data);
+      p=p->next;
+    }while(p!=head);
+   }
+   int main()
+   {
+    insertCLL(28);
+    insertCLL(56);
+    insertCLL(3);
+    insertCLL(90);
+    insertCLL(23);
+    insertCLL(22);
+    display();
+    return 0;
+   }
+   OUTPUT-
+       28      56      3       90      23      22
+
+   Question.2:  [Create a CLL take input from users]
+
+                     [Program Code]	 
+     
+    #include<stdio.h>
+    void create();
+    void dis();
+    struct node
+    {
+    int  data;
+    struct node *next;
+    };
+    struct node *head,*newnode,*temp;
+    int main()
+    {
+    create();
+     dis();
+    }
+    void create()
+    {
+    head=0;
+    int choice;
+    while(choice)
+    {
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("\nEnter the data:");
+    scanf("%d",&newnode->data);
+    newnode->next=0;
+    if(head==0)
+    {
+    head=temp=newnode;
+    }
+    else
+    {
+    temp->next=newnode;
+    temp=newnode;
+    }
+    temp->next=head;
+    printf("\nDo you want to continue(0,1):");
+     scanf("%d",&choice);}
+    }
+    void dis()
+    {
+    if(head==0)
+    {
+    printf("\nList is empty");
+    }
+    else
+    {
+    temp=head;
+     while(temp->next!=head)
+    {
+    printf("\n%d",temp->data);
+    temp=temp->next;
+    }
+    printf("\n%d",temp->data);
+     }
+    }
+    INPUT-
+     
+    Enter the data:4
+    Do you want to continue(0,1):1
+    Enter the data:3
+    Do you want to continue(0,1):1
+    Enter the data:7
+	Do you want to continue(0,1):0
+    OUTPUT-
+     4
+     3
+     7	
+	Question.3:  [Insert given array in CLL]
+
+                     [Program Code]
+					 
+	#include<stdio.h>
+    struct node
+    {
+    int data;
+    struct node* next;
+    };
+    struct node* head=NULL,*last=NULL;
+   void insertCLL(int a[],int n)
+   {
+    struct node* temp;
+    head=(struct node*)malloc(sizeof(struct node));
+    head->data=a[0];
+    head->next=head;
+    last=head;
+    for(int i=1;i<n;i++)
+    {
+        temp=(struct node*)malloc(sizeof(struct node));
+        temp->data=a[i];
+        temp->next=temp;
+        last->next=temp;
+        last=temp;
+        last->next=head;
+      }
+    }
+    void display()
+    {
+    struct node* p=head;
+    do
+    {
+        printf("\t%d",p->data);
+        p=p->next;
+    }while(p!=head);
+    }
+   int main()
+   {
+    int a[]={9,0,4,5,6,7,0,0,6,4};
+    int n=sizeof(a)/sizeof(int);
+    insertCLL(a,n);
+    display();
+    return 0;
+   }	
+    OUTPUT-   9       0       4       5       6       7       0       0       6       4
+	
+    Question.4:  [Create a CLL (delete,insert random position)]
+
+                     [Program Code]
+					 
+	#include<stdio.h>
+    #include<stdlib.h>
+   struct node
+   {
+    int data;
+    struct node *next;
+   }*tail;
+   int count=0;
+   void create()
+  {
+    int ch=1;
+    tail=0;
+    struct node *newnode;
+    while(ch)
+    {
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter data\n");
+    scanf("%d",&newnode->data);
+    newnode->next=0;
+    if(tail==0)
+    {
+        tail=newnode;
+        tail->next=newnode;
+    }
+    else
+    {    newnode->next=tail->next;
+        tail->next=newnode;
+        tail=newnode;
+    }
+    printf("do u want to continue(0,1)=");
+    scanf("%d",&ch);
+    count++;
+    }
+   }
+void display()
+{
+struct node *temp;
+temp=tail->next;
+if(tail==0)
+{
+    printf("empty link list");
+}
+else
+{
+    while(temp->next!=tail->next)
+    {
+  printf("\t %d",temp->data);
+  temp=temp->next;
+  }
+  printf("\t %d",temp->data);
+}
+}
+void insert_at_beg()
+{
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("\nenter data=");
+    scanf("%d",&newnode->data);
+    newnode->next=0;
+    if(tail==0)
+    {
+        tail=newnode;
+        tail->next=newnode;
+    }
+    else
+    {    newnode->next=tail->next;
+        tail->next=newnode;
+    }
+    count++;
+
+}
+
+void insert()
+{
+    int i=1,pos;
+   struct node *newnode,*temp;
+   printf("\nenter postion");
+   scanf("%d",&pos);
+   if(pos<0||pos>count)
+   {
+       printf("invalid insertion");
+   }
+   else if(pos==1)
+    {
+      insert_at_beg();
+    }
+   else
+   {
+      newnode=(struct node*)malloc(sizeof(struct node));
+    printf("\nenter data=");
+    scanf("%d",&newnode->data);
+    newnode->next=0;
+    temp=tail->next;
+    while(i<pos-1)
+    {
+        temp=temp->next;
+        i++;
+    }
+    newnode->next=temp->next;
+    temp->next=newnode;
+    }
+
+}
+void deleted_at_beg()
+{
+  struct node *temp;
+  temp=tail->next;
+  if(tail==0)
+  {
+      printf("empty");
+  }
+  else if(temp->next==temp)
+  {
+      tail=0;
+      free(temp);
+  }
+  else
+  {
+      tail->next=temp->next;
+      free(temp);
+  }
+}
+
+void deleted()
+{
+int pos,i=1;
+struct node *current,*nextnode;
+printf("\nenter postion ");
+scanf("%d",&pos);
+current=tail->next;
+if(pos<0||pos>count)
+{
+    printf("invalid postion");
+}
+else if(pos==1)
+{
+    deleted_at_beg();
+}
+else
+{
+    while(i<pos-1)
+    {
+        current=current->next;
+        i++;
+    }
+    nextnode=current->next;
+    current->next=nextnode->next;
+    free(nextnode);
+}
+}
+
+
+int main()
+{ int choice;
+ while(1)
+ {
+printf("\n1.create \n2.display \n3.insert at random position\n4.delete at random position\n5.exit\n");
+printf("enter your choice\n");
+scanf("%d",&choice);
+switch(choice)
+{
+case 1:
+    create();
+    break;
+case 2:
+    display();
+    break;
+case 3:
+    insert();
+    break;
+case 4:
+    deleted();
+    break;
+case 5:
+    exit(1);
+    break;
+default :
+    printf("invalid choice");
+
+   }
+ }   
+  return 0;
+}				 
+					 
+					 
+	Question.5:  [Create a method which returns number of nodes in CLL]
+
+                      [Program Code]
+	#include<stdio.h>
+    struct node
+    {
+    int data;
+    struct node* next;
+    };
+     struct node* head=NULL,*last=NULL;
+    void insertCLL(int a[],int n)
+    {
+    struct node* temp;
+    head=(struct node*)malloc(sizeof(struct node));
+    head->data=a[0];
+    head->next=head;
+    last=head;
+    for(int i=1;i<n;i++)
+    {
+        temp=(struct node*)malloc(sizeof(struct node));
+        temp->data=a[i];
+        temp->next=temp;
+        last->next=temp;
+        last=temp;
+        last->next=head;
+    }
+    }
+     int countNode()
+    {
+    int count=0;
+    struct node* p=head;
+    do
+    {
+        count++;
+        p=p->next;
+    }while(p!=head);
+    return count;
+    }
+    void display()
+   {
+    struct node* p=head;
+    do
+    {
+        printf("\t%d",p->data);
+        p=p->next;
+    }while(p!=head);
+    }
+   int main()
+   {
+    int a[]={9,0,4,5,6,7,10,0,6,4,88};
+    int n=sizeof(a)/sizeof(int);
+    insertCLL(a,n);
+    display();
+    printf("\n Print count nodes:");
+    printf("%d",countNode());
+    return 0;
+   }
+	OUTPUT-
+    9       0       4       5       6       7       10      0       6       4       88  
+    Print count nodes: 11	
+    	
